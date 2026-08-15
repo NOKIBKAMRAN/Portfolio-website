@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abu Nokib Kamran — Software Developer</title>
+<meta name="description" content="Abu Nokib Kamran — Software Developer in London, UK. Python, SQL, REST APIs, Agile delivery. MSc Computer Science (Distinction).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1120;
+  --bg-soft:#101a30;
+  --card:#131f38;
+  --line:#1f2d4d;
+  --text:#e6edf7;
+  --muted:#8ba0c0;
+  --accent:#34d399;
+  --accent2:#60a5fa;
+  --amber:#fbbf24;
+  --rose:#fb7185;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Sora',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--accent);color:#06281c}
+
+/* ---------- background grid ---------- */
+.grid-bg{position:fixed;inset:0;z-index:-2;
+  background-image:linear-gradient(rgba(96,165,250,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(96,165,250,.05) 1px,transparent 1px);
+  background-size:44px 44px;}
+.glow{position:fixed;z-index:-1;border-radius:50%;filter:blur(120px);opacity:.16;pointer-events:none}
+.glow.g1{width:520px;height:520px;background:var(--accent);top:-160px;right:-120px}
+.glow.g2{width:420px;height:420px;background:var(--accent2);bottom:-140px;left:-120px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(11,17,32,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--mono);font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;font-family:var(--mono);transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a::before{content:'./';color:var(--line);transition:color .2s}
+.nav-links a:hover::before{color:var(--accent)}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:1.15rem;padding:4px 12px;cursor:pointer;font-family:var(--mono)}
+
+/* ---------- hero ---------- */
+header{min-height:100svh;display:flex;align-items:center;padding:110px 0 60px}
+.avatar-wrap{position:relative;width:128px;height:128px;margin-bottom:22px;border-radius:50%;
+  padding:4px;background:linear-gradient(135deg,var(--accent),var(--accent2),#c084fc);
+  box-shadow:0 8px 32px rgba(52,211,153,.3)}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%;display:block;border:3px solid var(--bg)}
+.avatar-fallback{display:none;width:100%;height:100%;border-radius:50%;background:var(--card);
+  border:3px solid var(--bg);align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:700;font-size:2.2rem;color:var(--accent)}
+.avatar-wrap.noimg img{display:none}
+.avatar-wrap.noimg .avatar-fallback{display:flex}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;width:100%}
+.kicker{font-family:var(--mono);color:var(--accent);font-size:.9rem;letter-spacing:.06em;margin-bottom:14px}
+.kicker::before{content:'~$ ';color:var(--muted)}
+h1{font-size:clamp(2.3rem,5.5vw,3.7rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+h1 .accent{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{color:var(--muted);margin:18px 0 8px;font-size:1.05rem;max-width:34rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 28px}
+.chip{font-family:var(--mono);font-size:.76rem;color:var(--accent2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:rgba(96,165,250,.06)}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-family:var(--mono);font-size:.88rem;font-weight:500;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--accent);color:#06281c;box-shadow:0 6px 24px rgba(52,211,153,.25)}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent)}
+
+/* terminal */
+.term{background:#0d1526;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);font-family:var(--mono);font-size:.82rem}
+.term-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#111c33;border-bottom:1px solid var(--line)}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.term-title{margin-left:auto;color:var(--muted);font-size:.72rem}
+.term-body{padding:18px 20px;line-height:1.75;min-height:285px;overflow-x:auto}
+.term-body div{white-space:pre}
+.tk-kw{color:#c084fc}.tk-str{color:#34d399}.tk-var{color:#60a5fa}.tk-com{color:#5b6b8c}.tk-num{color:#fbbf24}
+.cursor{display:inline-block;width:8px;height:1.05em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- sections ---------- */
+section{padding:84px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:42px}
+.sec-num{font-family:var(--mono);color:var(--accent);font-size:.95rem}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.01em}
+.sec-line{flex:1;height:1px;background:var(--line)}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:start}
+.about-grid p{color:var(--muted);margin-bottom:16px}
+.about-grid strong{color:var(--text);font-weight:600}
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 18px;transition:border-color .25s,transform .25s}
+.stat:hover{border-color:var(--accent);transform:translateY(-3px)}
+.stat b{display:block;font-size:1.55rem;font-weight:800;color:var(--accent)}
+.stat span{font-size:.78rem;color:var(--muted);font-family:var(--mono)}
+
+/* skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.skill-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 22px;transition:border-color .25s,transform .25s}
+.skill-card:hover{border-color:var(--accent2);transform:translateY(-4px)}
+.skill-card h3{font-size:.95rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.skill-card h3 .ico{font-family:var(--mono);color:var(--accent);font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:var(--mono);font-size:.72rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 9px;transition:all .2s}
+.skill-card:hover .tag{color:var(--text)}
+
+/* timeline */
+.timeline{position:relative;margin-left:8px}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2),transparent)}
+.t-item{position:relative;padding:0 0 44px 34px}
+.t-item:last-child{padding-bottom:0}
+.t-item::before{content:'';position:absolute;left:-6px;top:6px;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:3px solid var(--accent);transition:background .25s}
+.t-item:hover::before{background:var(--accent)}
+.t-date{font-family:var(--mono);font-size:.75rem;color:var(--accent);margin-bottom:6px;letter-spacing:.04em}
+.t-item h3{font-size:1.1rem;font-weight:700}
+.t-item .org{color:var(--accent2);font-size:.88rem;font-family:var(--mono);margin-bottom:12px}
+.t-item ul{list-style:none}
+.t-item li{color:var(--muted);font-size:.92rem;padding-left:20px;position:relative;margin-bottom:8px}
+.t-item li::before{content:'▹';position:absolute;left:0;color:var(--accent)}
+.t-item li b{color:var(--text);font-weight:600}
+
+/* research */
+.paper-card{display:grid;grid-template-columns:340px 1fr;gap:34px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;padding:30px;transition:border-color .25s}
+.paper-card:hover{border-color:var(--accent)}
+.paper-fig{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);
+  background:#fff;align-self:start;display:block;box-shadow:0 14px 40px rgba(0,0,0,.4);
+  transition:transform .3s,box-shadow .3s}
+.paper-fig:hover{transform:translateY(-5px) rotate(-.6deg);box-shadow:0 22px 54px rgba(0,0,0,.55)}
+.paper-fig img{width:100%;display:block}
+.paper-fig .fig-hint{position:absolute;bottom:0;left:0;right:0;text-align:center;
+  font-family:var(--mono);font-size:.68rem;color:var(--text);background:rgba(11,17,32,.85);padding:7px 0}
+.p-status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;
+  color:var(--amber);border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.08);
+  border-radius:999px;padding:4px 13px;margin-bottom:14px}
+.p-status .pulse{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 1.6s ease infinite}
+@keyframes pulse{50%{opacity:.25}}
+.paper-card h3{font-size:1.15rem;font-weight:700;line-height:1.45;margin-bottom:10px}
+.p-journal{color:var(--accent2);font-family:var(--mono);font-size:.82rem;margin-bottom:14px}
+.p-authors{color:var(--muted);font-size:.86rem;margin-bottom:18px}
+.p-authors .me{color:var(--accent);font-weight:600}
+.p-authors .fa-badge{font-family:var(--mono);font-size:.66rem;color:#06281c;background:var(--accent);
+  border-radius:5px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+.p-points{list-style:none;margin-bottom:4px}
+.p-points li{color:var(--muted);font-size:.9rem;padding-left:20px;position:relative;margin-bottom:8px}
+.p-points li::before{content:'▹';position:absolute;left:0;color:var(--accent)}
+.p-points li b{color:var(--text);font-weight:600}
+.p-metrics{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.p-metric{font-family:var(--mono);font-size:.74rem;color:var(--text);border:1px solid var(--line);
+  border-radius:8px;padding:8px 14px;background:var(--bg-soft)}
+.p-metric b{color:var(--accent);font-size:.95rem;display:block}
+
+/* education & certs */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.edu-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 24px;transition:border-color .25s,transform .25s}
+.edu-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.edu-card .deg{font-weight:700;font-size:1.02rem}
+.edu-card .school{color:var(--accent2);font-size:.86rem;font-family:var(--mono);margin:6px 0 10px}
+.badge{display:inline-block;font-family:var(--mono);font-size:.72rem;background:rgba(52,211,153,.12);color:var(--accent);border:1px solid rgba(52,211,153,.35);border-radius:999px;padding:3px 12px}
+.cert-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.cert{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--muted);transition:border-color .25s}
+.cert:hover{border-color:var(--amber);color:var(--text)}
+.cert .c-ico{color:var(--amber);font-family:var(--mono)}
+
+/* contact */
+.contact{text-align:center;padding:96px 0 110px}
+.contact .kicker{justify-content:center}
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px}
+.contact p{color:var(--muted);max-width:34rem;margin:0 auto 34px}
+.contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--muted);font-family:var(--mono);font-size:.75rem}
+footer .heart{color:var(--rose)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr;gap:38px}
+  .about-grid{grid-template-columns:1fr}
+  .paper-card{grid-template-columns:1fr;padding:22px}
+  .paper-fig{max-width:340px;margin:0 auto;width:100%}
+  .edu-grid{grid-template-columns:1fr}
+  .cert-list{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .burger{display:block}
+  .nav-links{position:fixed;top:57px;right:0;left:0;flex-direction:column;gap:0;
+    background:#0b1120;border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .nav-links.open{max-height:420px}
+  .nav-links li{width:100%;text-align:center;border-top:1px solid var(--line)}
+  .nav-links a{display:block;padding:15px 0}
+  header{padding-top:96px}
+  section{padding:64px 0}
+  .term-body{min-height:250px;font-size:.74rem}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top"><span>&gt;_</span> nokib<span>.</span>dev</a>
+    <button class="burger" id="burger" aria-label="Menu">≡</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#research">research</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="avatar-wrap" id="avatarWrap">
+        <img src="profile.jpg" alt="Abu Nokib Kamran" onerror="document.getElementById('avatarWrap').classList.add('noimg')">
+        <span class="avatar-fallback">AK</span>
+      </div>
+      <div class="kicker">whoami</div>
+      <h1>Abu Nokib <span class="accent">Kamran</span></h1>
+      <p class="tagline">Software Developer in London building with <strong>Python</strong>, <strong>SQL</strong> and <strong>REST APIs</strong> — MSc Computer Science (Distinction), with a delivery background that ships software all the way to production.</p>
+      <div class="chips">
+        <span class="chip">📍 London, UK</span>
+        <span class="chip">🎓 MSc — Distinction</span>
+        <span class="chip">🇬🇧 Right to work — no sponsorship needed</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-solid" href="#contact">get_in_touch()</a>
+        <a class="btn btn-ghost" href="https://github.com/NOKIBKAMRAN" target="_blank" rel="noopener">view_github()</a>
+      </div>
+    </div>
+    <div class="term reveal on">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">developer.py — nokib@london</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">01.</span><h2>About</h2><span class="sec-line"></span></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a software developer with an <strong>MSc in Computer Science (Distinction)</strong> from the University of South Wales and a <strong>BSc in Software Engineering</strong>, combining hands-on development in Python, SQL and REST-based APIs with a strong grounding in requirements analysis, API contract review and Agile delivery.</p>
+        <p>I've worked across the <strong>full SDLC</strong> — feature implementation, unit testing, code review and stakeholder collaboration — from a Junior Software Developer role through product and project delivery positions. For my MSc dissertation I built a complete <strong>Python computer-vision/ML pipeline</strong> that reached ~97% test accuracy.</p>
+        <p>I'm comfortable with third-party API integrations, JSON/XML data interchange and database-driven applications — and keen to apply that mix of engineering and delivery experience to building secure, scalable booking and B2B travel technology platforms.</p>
+      </div>
+      <div class="stat-cards reveal">
+        <div class="stat"><b>10+</b><span>websites shipped end-to-end</span></div>
+        <div class="stat"><b>~97%</b><span>ML model test accuracy</span></div>
+        <div class="stat"><b>-30%</b><span>post-release issues</span></div>
+        <div class="stat"><b>+20%</b><span>team throughput</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">02.</span><h2>Skills</h2><span class="sec-line"></span></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h3><span class="ico">{ }</span>Languages &amp; APIs</h3>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">REST APIs</span><span class="tag">JSON</span><span class="tag">XML</span><span class="tag">API contract review</span><span class="tag">3rd-party integration</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">[=]</span>Data &amp; Databases</h3>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">Relational modelling</span><span class="tag">Power BI</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&lt;/&gt;</span>Engineering Practices</h3>
+        <div class="tags"><span class="tag">SDLC</span><span class="tag">Unit testing</span><span class="tag">Code review</span><span class="tag">Debugging</span><span class="tag">QA</span><span class="tag">Troubleshooting</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">⎇</span>Tools &amp; Version Control</h3>
+        <div class="tags"><span class="tag">Git</span><span class="tag">Jira</span><span class="tag">Confluence</span><span class="tag">Backlog mgmt</span><span class="tag">Release mgmt</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">↻</span>Methodologies</h3>
+        <div class="tags"><span class="tag">Agile</span><span class="tag">Scrum</span><span class="tag">BRD / FRD / UAT</span><span class="tag">PRDs</span><span class="tag">User stories</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">🌐</span>Web Development</h3>
+        <div class="tags"><span class="tag">End-to-end builds</span><span class="tag">Front-end structure</span><span class="tag">Back-end config</span><span class="tag">Deployment</span><span class="tag">SEO / Analytics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">03.</span><h2>Experience</h2><span class="sec-line"></span></div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-date">SEP 2023 — PRESENT · LONDON</div>
+        <h3>Freelance Web Developer</h3>
+        <div class="org">Self-employed · Academic Sabbatical</div>
+        <ul>
+          <li>Designed and built <b>10+ company websites end-to-end</b> — requirements → wireframes → build → testing → launch — including QA, deployment and handover training.</li>
+          <li>Developed a full <b>Python computer-vision/ML pipeline</b> (preprocessing, augmentation, training, evaluation) for an MSc dissertation completed with Distinction — <b>~97% test accuracy</b>.</li>
+          <li>Kept development skills sharp in Python, SQL, REST APIs and data workflows; built working prototypes to validate technical approaches.</li>
+        </ul>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">JAN 2023 — AUG 2023 · DHAKA</div>
+        <h3>Project Manager</h3>
+        <div class="org">Syscomatic</div>
+        <ul>
+          <li>Translated business requirements into technical specifications with engineering teams and managed delivery against product roadmaps.</li>
+          <li>Reviewed release readiness — defect tracking, QA sign-off and deployment coordination.</li>
+          <li>Owned delivery KPIs and dashboards (velocity, defect trend, scope change); achieved <b>~30% fewer post-release issues</b> and <b>~20% higher throughput</b>.</li>
+        </ul>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">FEB 2022 — DEC 2022 · DHAKA</div>
+        <h3>Project Coordinator</h3>
+        <div class="org">Frontech Limited</div>
+        <ul>
+          <li>Coordinated development workstreams end-to-end: backlog refinement, estimation, sprint planning, code review scheduling, retrospectives.</li>
+          <li>Reviewed <b>API contracts</b> with engineers for clarity, testability and integration readiness — directly relevant to third-party GDS, airline and payment APIs.</li>
+          <li>Wrote and maintained PRDs and acceptance criteria in Confluence; ran UAT sessions and tracked risks via RAID logs.</li>
+        </ul>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">FEB 2021 — JAN 2022 · DHAKA</div>
+        <h3>Junior Software Developer</h3>
+        <div class="org">Frontech Limited</div>
+        <ul>
+          <li>Implemented and <b>unit-tested features</b> across sprint cycles in an Agile team, participating in code reviews to maintain quality standards.</li>
+          <li>Used <b>Git</b> across all feature branches; refined user stories and acceptance criteria with the team, reducing rework from unclear requirements.</li>
+          <li>Debugged and troubleshot reported defects, improving ticket clarity and shortening dev–QA handover time.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">04.</span><h2>Research Experience</h2><span class="sec-line"></span></div>
+    <div class="paper-card reveal">
+      <a class="paper-fig" href="paper-page1.png" target="_blank" rel="noopener">
+        <img src="paper-page1.png" alt="First page of the submitted IJACSA paper" loading="lazy">
+        <span class="fig-hint">view first page ↗</span>
+      </a>
+      <div>
+        <span class="p-status"><span class="pulse"></span>SUBMITTED · UNDER REVIEW</span>
+        <h3>An Internally Evaluated Weighted Ensemble of Transfer-Learning Models for Five-Class Diabetic Retinopathy Grading</h3>
+        <div class="p-journal">International Journal of Advanced Computer Science &amp; Applications (IJACSA)</div>
+        <div class="p-authors"><span class="me">Abu Nokib Kamran</span><span class="fa-badge">FIRST AUTHOR</span> · Farhana Ferdose · Akramul Hassan · Fasee Ullah · Shahid Kamal</div>
+        <ul class="p-points">
+          <li>Fine-tuned <b>eight ImageNet-pretrained backbones</b> under a single controlled configuration on the APTOS 2019 retinal fundus dataset.</li>
+          <li>Built a fixed pre-processing pipeline — Ben Graham's method, border cropping, lighting normalisation, <b>CLAHE</b> and Gaussian filtering — with class-balanced augmentation.</li>
+          <li>Combined the three strongest models (<b>DenseNet121, ResNet101, VGG16</b>) via weighted probability fusion for five-class diabetic retinopathy grading.</li>
+        </ul>
+        <div class="p-metrics">
+          <span class="p-metric"><b>97.85%</b>accuracy</span>
+          <span class="p-metric"><b>0.9786</b>macro F1</span>
+          <span class="p-metric"><b>0.9732</b>Cohen's κ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">05.</span><h2>Education &amp; Certifications</h2><span class="sec-line"></span></div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="deg">MSc Computer Science</div>
+        <div class="school">University of South Wales, UK</div>
+        <span class="badge">★ Distinction</span>
+      </div>
+      <div class="edu-card reveal">
+        <div class="deg">BSc Software Engineering <small style="color:var(--muted)">(Robotics major)</small></div>
+        <div class="school">Daffodil International University, Bangladesh</div>
+        <span class="badge">CGPA 3.76</span>
+      </div>
+    </div>
+    <div class="cert-list">
+      <div class="cert reveal"><span class="c-ico">◆</span>Professional Scrum Product Owner™ I (PSPO I)</div>
+      <div class="cert reveal"><span class="c-ico">◆</span>IBM Project Manager — Coursera</div>
+      <div class="cert reveal"><span class="c-ico">◆</span>Scrum Master — The Knowledge Academy</div>
+      <div class="cert reveal"><span class="c-ico">◆</span>Lean Six Sigma Green Belt — The Knowledge Academy</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="kicker" style="display:flex">06. what's next?</div>
+    <h2>Let's build something.</h2>
+    <p>I'm available full-time, on-site in London — Graduate Route visa, no sponsorship required. Whether it's a role, a project or just a chat about travel tech, my inbox is open.</p>
+    <div class="contact-links">
+      <a class="btn btn-solid" href="mailto:abunokib.kamran@gmail.com">abunokib.kamran@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/abu-nokib-kamran-66b130189" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/NOKIBKAMRAN" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="tel:+447931006099">+44 7931 006099</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">built with <span class="heart">♥</span> by abu nokib kamran · london · © <span id="year"></span></div>
+</footer>
+
+<script>
+// ----- mobile nav -----
+const burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+burger.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+// ----- reveal on scroll -----
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ----- typed terminal -----
+const lines=[
+  [['tk-com','# developer.py']],
+  [['tk-kw','class '],['tk-var','Developer'],['','():']],
+  [['','    name     = '],['tk-str','"Abu Nokib Kamran"']],
+  [['','    role     = '],['tk-str','"Software Developer"']],
+  [['','    base     = '],['tk-str','"London, UK"']],
+  [['','    stack    = ['],['tk-str','"Python"'],['',', '],['tk-str','"SQL"'],['',', '],['tk-str','"REST APIs"'],['',']']],
+  [['','    degree   = '],['tk-str','"MSc CS — Distinction"']],
+  [['','    ml_acc   = '],['tk-num','0.97']],
+  [['','']],
+  [['','    '],['tk-kw','def '],['tk-var','hire'],['','(self):']],
+  [['','        '],['tk-kw','return '],['tk-str','"Let\'s talk ✉"']],
+];
+const body=document.getElementById('termBody');
+let li=0,ci=0,lineEl=null,spans=null,flat=null;
+function flatten(line){const out=[];line.forEach(([cls,txt])=>{for(const ch of txt)out.push([cls,ch])});return out}
+function type(){
+  if(li>=lines.length){body.insertAdjacentHTML('beforeend','<span class="cursor"></span>');return}
+  if(!lineEl){lineEl=document.createElement('div');body.appendChild(lineEl);flat=flatten(lines[li]);ci=0;
+    if(flat.length===0){lineEl.innerHTML='&nbsp;';lineEl=null;li++;setTimeout(type,60);return}}
+  const [cls,ch]=flat[ci];
+  const last=lineEl.lastElementChild;
+  if(last&&last.dataset.cls===cls){last.textContent+=ch}
+  else{const s=document.createElement('span');if(cls)s.className=cls;s.dataset.cls=cls;s.textContent=ch;lineEl.appendChild(s)}
+  ci++;
+  if(ci>=flat.length){lineEl=null;li++;setTimeout(type,90)}
+  else setTimeout(type,18);
+}
+setTimeout(type,500);
+
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
