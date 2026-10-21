@@ -166,6 +166,9 @@ h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.01em}
 .p-metric{font-family:var(--mono);font-size:.74rem;color:var(--text);border:1px solid var(--line);
   border-radius:8px;padding:8px 14px;background:var(--bg-soft)}
 .p-metric b{color:var(--accent);font-size:.95rem;display:block}
+.paper-card + .paper-card{margin-top:28px}
+.p-status.p-poster{color:var(--accent2);border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.08)}
+.p-status.p-poster .pulse{background:var(--accent2)}
 
 /* education & certs */
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -390,6 +393,30 @@ footer .heart{color:var(--rose)}
           <span class="p-metric"><b>97.85%</b>accuracy</span>
           <span class="p-metric"><b>0.9786</b>macro F1</span>
           <span class="p-metric"><b>0.9732</b>Cohen's κ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-card reveal">
+      <a class="paper-fig" href="poster.pdf" target="_blank" rel="noopener">
+        <img src="poster-preview.png" alt="BMVC 2026 TrustVis workshop poster: Are Deepfake Detectors Looking at the Right Face?" loading="lazy">
+        <span class="fig-hint">view full poster (PDF) ↗</span>
+      </a>
+      <div>
+        <span class="p-status p-poster"><span class="pulse"></span>WORKSHOP POSTER · BMVC 2026</span>
+        <h3>Are Deepfake Detectors Looking at the Right Face? A Semantic Region Explanation Consistency Study</h3>
+        <div class="p-journal">BMVC 2026 · Workshop on Trustworthy Visual AI (TrustVis)</div>
+        <div class="p-authors">Kazi Rifat Ahmed · <span class="me">Abu Nokib Kamran</span></div>
+        <ul class="p-points">
+          <li>Fine-tuned <b>eight ImageNet backbones (7 families)</b> on 4,000 FaceForensics++ frames and generated <b>Grad-CAM++</b> maps for every test image, evaluating on FF++ and Celeb-DF v2.</li>
+          <li>Used <b>BiSeNet face parsing</b> to attribute saliency to six facial regions, and proposed <b>Semantic Attribution Consistency (SAC)</b> to measure whether different architectures look at the same place.</li>
+          <li>Found that eyes + nose + mouth receive <b>1.3–3.2×</b> their pixel share in every detector, while <b>ViT-B/16</b> disagrees with all CNNs at pixel level (r ≤ 0.16).</li>
+          <li>Exploratory result: non-facial attribution correlates with a smaller FF++→Celeb-DF accuracy drop (r = −0.71, n = 8), but not with AUC drop.</li>
+        </ul>
+        <div class="p-metrics">
+          <span class="p-metric"><b>8</b>detectors compared</span>
+          <span class="p-metric"><b>0.95–0.98</b>SAC within top CNNs</span>
+          <span class="p-metric"><b>r = 0.83</b>SAC vs pixel agreement</span>
         </div>
       </div>
     </div>
